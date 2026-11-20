@@ -1,12 +1,25 @@
 <head>
-    <title>Заголовок страницы</title>
+    <title>InterBook</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<h1>Books</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+<h2>InterBook</h2>
 <section>
 <?php
 const Books = 'Books';
 
+/** Подвал */
+function Bottom()
+{
+?>
+</section>
+SG Software, 2026. Экспериментальная версия
+</div>
+<?php
+}
+
+/** Отладочное: вывод массива */
 function out($var, $var_name = '') {
     echo '<pre style="outline: 1px dashed
         red;padding:5px;margin:10px;color:white;background:black;">';
