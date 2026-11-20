@@ -14,7 +14,7 @@ function Bottom()
 {
 ?>
 </section>
-SG Software, 2026. Экспериментальная версия
+2026 SG Software. Экспериментальная версия
 </div>
 <?php
 }

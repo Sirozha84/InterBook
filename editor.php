@@ -28,21 +28,38 @@ DrawThree($book['chapter']);
 
 Bottom();
 
-//function DrawThree($chapter, $forkn = 0, $threen = 0, $ln = 0) {
-function DrawThree($chapter, $forkn = 0, $threen = 0, $last = false) {
-    //echo $last;
-    if ($threen != 0) { echo '<code>'; for ($i = 1; $i < $threen; $i++) echo '│&nbsp'; echo $last ? '└─' : '├─'; echo '</code>';}
+function DrawThree($chapter, $forkn = 0, $threen = 0, $lasts = []) {
+    // Ветка первой строки
+    echo '<code>';
+    $c = 0;
+    foreach($lasts as $last)
+        if (++$c < count($lasts)) echo $last? "&nbsp&nbsp":"│&nbsp";
+        else echo $last? "└─":"├─";
+    echo '</code>';
+    
+    // Заголовок
     if ($chapter['title'] != '')
         echo $chapter['title'].'<br>';
     else
         echo "Вилка $forkn<br>";
-    if ($threen != 0) { echo '<code>'; for ($i = 1; $i < $threen; $i++) echo '│&nbsp'; echo $last ? '&nbsp&nbsp' : '│&nbsp'; echo '</code>'; }
+
+    // Ветка второй строки
+    echo '<code>';
+    $c = 0;
+    foreach($lasts as $last)
+        if (++$c < count($lasts)) echo $last? "&nbsp&nbsp":"│&nbsp";
+        else echo $last? "&nbsp&nbsp":"│&nbsp";
+    echo '</code>';
+
+    // Текст
     echo $chapter['text'].'<br>';
+    
+    // Внутренние подветки
     if (isset($chapter['forks'])) {
         $n = 0;
         foreach($chapter['forks'] as $ch) {
-            $last = $n == count($chapter['forks']);
-            DrawThree ($ch, ++$n, $threen + 1, $n == count($chapter['forks']));
+            $lasts[$threen] = (++$n == count($chapter['forks']));
+            DrawThree ($ch, $n, $threen + 1, $lasts);
         }
     }
 }
