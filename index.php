@@ -30,7 +30,7 @@ function Catalog() {
         if (!str_starts_with($file, '.') && str_ends_with($file, '.json')) {
             $title = str_replace('.json', '', $file);
             $_SESSION['files'][$n] = $file;
-            echo "<tr><td>$title</td><td><button name=\"edit>$n\" class=\"smallbutton\">Ред.</button></td></tr>";
+            echo "<tr><td><a href=\"read.php?book=$file\">$title</a></td><td><button name=\"edit>$n\" class=\"smallbutton\">Ред.</button></td></tr>";
             $n++;
         }
     }
