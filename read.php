@@ -8,15 +8,23 @@ session_start();
 
 // Обработка кнопок
 foreach ($_POST as $button  => $vl) {
-    if ($button == 'close') header('Location: index.php');
+    if ($button == 'close') {
+        if (!file_exists(BookMarks)) mkdir(BookMarks);
+        file_put_contents(BookMarks.'/'.$_SESSION['filename'], json_encode($_SESSION['bookmark']));
+        header('Location: index.php');
+    }
+    if ($button =='back') array_pop($_SESSION['bookmark']);
     if (str_starts_with($button, 'fork>')) $_SESSION['bookmark'][] = str_replace('fork>', '', $button);
 }
 
 // Обработка параметров
 if (isset($_GET['book'])) {
     $filename = $_GET['book'];
+    $_SESSION['filename'] = $filename;
     $_SESSION['book'] = json_decode(file_get_contents(Books.'/'.$filename), true);
-    $_SESSION['bookmark'] = [];
+    if (file_exists(BookMarks.'/'.$filename))
+        $_SESSION['bookmark'] = json_decode(file_get_contents(BookMarks.'/'.$filename), true);
+    else $_SESSION['bookmark'] = [];
 }
 $book = $_SESSION['book'];
 $bookmark = $_SESSION['bookmark'];
@@ -30,8 +38,9 @@ foreach($bookmark as $f) {
 }
 
 // Рисование страницы
+if (count($bookmark) > 0) echo '<button name="back">Назад</button>';
 echo '<button name="close">Закрыть</button>';
-echo "Страница: $page<hr>";
+echo "{$book['title']}, {$book['author']}, Страница: $page<hr>";
 
 // Рисование главы
 if ($chapter['title'] != '') echo "<h1>{$chapter['title']}</h1>";;

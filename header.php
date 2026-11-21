@@ -8,6 +8,7 @@
 <section>
 <?php
 const Books = 'Books';
+const BookMarks = 'BookMarks';
 
 /** Подвал */
 function Bottom()
