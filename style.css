@@ -20,10 +20,10 @@ p {
     font-size: 16px;
 }
   
-pre {
+/*pre {
     background-color: cadetblue;
     padding: 32px;
-}
+}*/
   
 /*table {
     background-color: white;
@@ -50,4 +50,29 @@ button {
     width: 100%;       /* Занимает всю доступную ширину на узких экранах */
     margin: auto;         /* Выравнивает блок по центру */
     padding: 0px;   /* Боковые отступы, чтобы текст не прилипал к краям */
+}
+
+.layout {
+  display: flex;
+  gap: 24px;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: #f4eebd;
+  padding: 16px;
+  white-space: nowrap;  /* Запрещает перенос строк, если они не влезают */
+  /*overflow: hidden;     /* Скрывает то, что не поместилось */
+  /*text-overflow: ellipsis;  /* Многоточие */
+}
+
+/* Ссылки */
+a,
+a:link,
+a:visited,                  /* Делаем так, чтобы цвет ссылок не менялся */
+a:hover,
+a:active {
+  color: #0066cc;
+  text-decoration: none;    /* А так убираем подчёркивание */
 }
